@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
+  button {
     @apply py-2 px-4 bg-blue-200;
   }
-}
 
-*/
+  input[type="submit"] {
+    @apply py-2 px-4 bg-blue-200;
+  }
+
+  a {
+    @apply text-indigo-600 underline;
+  }
+}
