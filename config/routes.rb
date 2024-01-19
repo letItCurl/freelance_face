@@ -1,4 +1,13 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -6,5 +15,14 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+
+  devise_scope :user do
+    authenticated do
+      root to: "users/registrations#edit", as: :authenticated_root
+    end
+
+    unauthenticated do
+      root to: "users/registrations#new", as: :unauthenticated_root
+    end
+  end
 end
