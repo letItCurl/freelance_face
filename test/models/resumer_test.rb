@@ -10,7 +10,7 @@ end
 #
 # Table name: resumers
 #
-#  id              :bigint           not null, primary key
+#  id              :uuid             not null, primary key
 #  about           :text
 #  calendy_code    :text
 #  experiences     :jsonb
