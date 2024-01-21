@@ -1,6 +1,6 @@
-class CreateResumers < ActiveRecord::Migration[7.1]
+class CreateResumes < ActiveRecord::Migration[7.1]
   def change
-    create_table :resumers, id: :uuid do |t|
+    create_table :resumes, id: :uuid do |t|
       t.text :about
       t.jsonb :experiences
       t.jsonb :skills

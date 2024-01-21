@@ -16,9 +16,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
 
+  scope module: :back_office do
+    resources :resumes
+  end
+
   devise_scope :user do
     authenticated do
-      root to: "users/registrations#edit", as: :authenticated_root
+      root to: "back_office/resumes#index", as: :authenticated_root
     end
 
     unauthenticated do

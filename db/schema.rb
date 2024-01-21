@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_21_041351) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_21_042643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "resumers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "resumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "about"
     t.jsonb "experiences"
     t.jsonb "skills"
@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_041351) do
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.index ["user_id"], name: "index_resumes_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -40,4 +42,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_041351) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "resumes", "users"
 end

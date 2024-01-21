@@ -2,23 +2,23 @@
 
 one:
   about: MyText
-  experiences: 
-  skills: 
+  experiences:
+  skills:
   calendy_code: MyText
   loom_video_code: MyText
-  type: 
+  type:
 
 two:
   about: MyText
-  experiences: 
-  skills: 
+  experiences:
+  skills:
   calendy_code: MyText
   loom_video_code: MyText
   type:
 
 # == Schema Information
 #
-# Table name: resumers
+# Table name: resumes
 #
 #  id              :uuid             not null, primary key
 #  about           :text
@@ -29,4 +29,13 @@ two:
 #  type            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  user_id         :uuid
+#
+# Indexes
+#
+#  index_resumes_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #

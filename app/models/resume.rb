@@ -1,14 +1,9 @@
-require "test_helper"
-
-class ResumerTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class Resume < ApplicationRecord
 end
 
 # == Schema Information
 #
-# Table name: resumers
+# Table name: resumes
 #
 #  id              :uuid             not null, primary key
 #  about           :text
@@ -19,4 +14,13 @@ end
 #  type            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  user_id         :uuid
+#
+# Indexes
+#
+#  index_resumes_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
