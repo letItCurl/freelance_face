@@ -1,5 +1,5 @@
 require "application_system_test_case"
-
+# copy for resume controller
 class BackOffice::ResumesTest < ApplicationSystemTestCase
   setup do
     @resume = back_office_resumes(:one)

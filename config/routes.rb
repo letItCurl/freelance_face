@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   scope module: :back_office do
     resources :resumes_replicas
+    resource :resume
   end
 
   devise_scope :user do

@@ -1,5 +1,5 @@
 require "test_helper"
-
+# copy for resume controller
 class BackOffice::ResumesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @resume = back_office_resumes(:one)
