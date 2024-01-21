@@ -1,22 +1,22 @@
-class BackOffice::ResumesController < ApplicationController
-  before_action :set_back_office_resume, only: %i[ show edit update destroy ]
+class BackOffice::ResumesReplicasController < ApplicationController
+  before_action :set_resume, only: %i[ show edit update destroy ]
 
   def index
-    @resumes = Resume.all
+    @resumes = current_user.resumes_replicas.all
   end
 
   def show
   end
 
   def new
-    @resume = Resume.new
+    @resume = current_user.resumes_replicas.new
   end
 
   def edit
   end
 
   def create
-    @resume = Resume.new(resume_params)
+    @resume = current_user.resumes_replicas.new(resume_params)
 
     respond_to do |format|
       if @resume.save
@@ -30,7 +30,7 @@ class BackOffice::ResumesController < ApplicationController
   def update
     respond_to do |format|
       if @resume.update(resume_params)
-        format.html { redirect_to resume_path(@resume), notice: "Resume was successfully updated." }
+        format.html { redirect_to resumes_replicas_path(@resume), notice: "Resume was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -41,13 +41,13 @@ class BackOffice::ResumesController < ApplicationController
     @resume.destroy!
 
     respond_to do |format|
-      format.html { redirect_to back_office_resumes_url, notice: "Resume was successfully destroyed." }
+      format.html { redirect_to resumes_url, notice: "Resume was successfully destroyed." }
     end
   end
 
   private
-    def set_back_office_resume
-      @resume = Resume.find(params[:id])
+    def set_resume
+      @resume = current_user.resumes_replicas.find(params[:id])
     end
 
     def resume_params
