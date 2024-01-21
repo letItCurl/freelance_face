@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_21_093903) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_21_093715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -29,25 +29,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_093903) do
   create_table "resumes_experiences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "description"
+    t.text "skills"
     t.datetime "started_at"
     t.datetime "ended_at"
     t.uuid "resume_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["resume_id"], name: "index_resumes_experiences_on_resume_id"
-  end
-
-  create_table "resumes_experiences_skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "skill_id"
-    t.uuid "experience_id"
-    t.index ["experience_id"], name: "index_resumes_experiences_skills_on_experience_id"
-    t.index ["skill_id"], name: "index_resumes_experiences_skills_on_skill_id"
-  end
-
-  create_table "resumes_skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

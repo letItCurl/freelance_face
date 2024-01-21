@@ -27,14 +27,6 @@ Rails.application.routes.draw do
     end
 
     resources :experiences, only: [:destroy]
-
-
-    resources :experiences, only: [] do
-      member do
-        resources :skills, only: [:create]
-      end
-      resources :skills, only: [:destroy]
-    end
   end
 
 

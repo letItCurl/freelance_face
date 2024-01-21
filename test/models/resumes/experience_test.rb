@@ -13,6 +13,7 @@ end
 #  id          :uuid             not null, primary key
 #  description :text
 #  ended_at    :datetime
+#  skills      :text
 #  started_at  :datetime
 #  title       :string
 #  created_at  :datetime         not null

@@ -2,8 +2,8 @@
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Resumes</h1>
     <div class="flex justify-end space-x-3">
-      <%= link_to "Create original resumer", edit_resume_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-      <% if @resume.present? %>
+      <%= link_to "Edit original resumer", edit_resume_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      <% if @resume.present? && false %>
         <%= link_to "Create resume replica", new_resumes_replica_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
       <% end %>
     </div>
@@ -12,7 +12,7 @@
     <% if @resume.present? && (@resumes_replicas.count > 0) %>
       <%= render partial: "resume", collection: @resumes_replicas %>
     <% elsif @resume.present? && (@resumes_replicas.count == 0) %>
-      <p class="text-green-700 bg-green-300 p-3 border border-green-700 text-center rounded shadow mt-3">Create your first resume replica</p>
+      <p class="text-green-700 bg-green-300 p-3 border border-green-700 text-center rounded shadow mt-3">Create your first resume replica (soon, havnt coded the feature yet...)</p>
     <% else %>
       <p class="text-red-700 bg-red-300 p-3 border border-red-700 text-center rounded shadow mt-3">Create your original resume first</p>
     <% end %>

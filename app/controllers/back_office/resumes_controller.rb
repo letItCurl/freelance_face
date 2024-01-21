@@ -11,11 +11,14 @@ class BackOffice::ResumesController < BackOfficeController
   def update
     respond_to do |format|
       if @resume.update(resume_params)
-        format.html { redirect_to resumes_replicas_url, notice: "Resume was successfully updated." }
+        format.html { redirect_to resume_url, notice: "Resume was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
+  end
+
+  def add_skill
   end
 
   private
@@ -26,6 +29,6 @@ class BackOffice::ResumesController < BackOfficeController
     end
 
     def resume_params
-      params.require(:resume).permit(:about, :loom_video_code, :calendy_code, experiences_attributes: [:id, :description, :ended_at, :started_at, :title])
+      params.require(:resume).permit(:about, :loom_video_code, :calendy_code, experiences_attributes: [:id, :description, :ended_at, :started_at, :title, :skills])
     end
 end

@@ -1,6 +1,0 @@
-<%= fields_for "resume[experiences_attributes][#{experience_id}][skills_attributes][#{skill.persisted? ? skill.id : skill.object_id }]", skill do |form| %>
-  <div class="flex flex-col">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-<% end %>
