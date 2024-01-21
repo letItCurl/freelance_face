@@ -1,4 +1,4 @@
-<%= form_with(model: resume, class: "contents") do |form| %>
+<%= form_with(model: resume, url: resume_path, class: "contents") do |form| %>
   <% if resume.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(resume.errors.count, "error") %> prohibited this resume from being saved:</h2>
@@ -10,6 +10,35 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="space-y-6 py-6">
+    <div class="flex flex-col">
+      <%= form.label :about %>
+      <%= form.text_area :about %>
+    </div>
+
+    <%= turbo_frame_tag "resume_experiences" do %>
+      <%= render partial: "experiences_fields", locals: { form: form } %>
+      <%= link_to "Add", experiences_path(id: resume.id), data: { turbo_method: :post } %>
+    <% end %>
+
+
+    <% if false %>
+      <div class="flex flex-col">
+        <%= form.label :skills_content %>
+        <%= form.text_area :skills_content %>
+      </div>
+    <% end %>
+    <div class="flex flex-col">
+      <%= form.label :loom_video_code %>
+      <%= form.text_area :loom_video_code %>
+    </div>
+    <div class="flex flex-col">
+      <%= form.label :calendy_code %>
+      <%= form.text_area :calendy_code %>
+    </div>
+  </div>
+
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

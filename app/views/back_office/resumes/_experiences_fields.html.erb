@@ -1,0 +1,19 @@
+<%= form.fields_for :experiences do |experience_subform| %>
+  <%= turbo_frame_tag experience_subform.object do %>
+    <div class="flex flex-col p-3 border rounded ">
+      <%= experience_subform.label :title %>
+      <%= experience_subform.text_field :title %>
+
+      <%= experience_subform.label :description %>
+      <%= experience_subform.text_area :description %>
+
+      <%= experience_subform.label :started_at %>
+      <%= experience_subform.date_field :started_at %>
+
+      <%= experience_subform.label :ended_at %>
+      <%= experience_subform.date_field :ended_at %>
+
+      <%= link_to 'Delete', experience_path(id: experience_subform.object.id), class: "text-red-500", data: { turbo_stream: true, turbo_method: :delete } %>
+    </div>
+  <% end %>
+<% end %>

@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_21_042643) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_21_093903) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "resumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "about"
-    t.jsonb "experiences"
-    t.jsonb "skills"
     t.text "calendy_code"
     t.text "loom_video_code"
     t.string "type"
@@ -25,6 +24,30 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_042643) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.index ["user_id"], name: "index_resumes_on_user_id"
+  end
+
+  create_table "resumes_experiences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.uuid "resume_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_resumes_experiences_on_resume_id"
+  end
+
+  create_table "resumes_experiences_skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "skill_id"
+    t.uuid "experience_id"
+    t.index ["experience_id"], name: "index_resumes_experiences_skills_on_experience_id"
+    t.index ["skill_id"], name: "index_resumes_experiences_skills_on_skill_id"
+  end
+
+  create_table "resumes_skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -42,5 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_042643) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "resumes", "users"
+  add_foreign_key "resumes", "users", on_delete: :cascade
+  add_foreign_key "resumes_experiences", "resumes", on_delete: :cascade
 end

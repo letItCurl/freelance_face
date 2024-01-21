@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_one :resume, -> { where(type: Resume.to_s)}, class_name: Resume.to_s
   has_many :resumes_replicas, class_name: Resumes::Replica.to_s
+
+  has_many :resumes
+  has_many :experiences, through: :resumes
 end
 
 # == Schema Information

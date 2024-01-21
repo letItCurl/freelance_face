@@ -1,15 +1,12 @@
-class BackOffice::ResumesReplicasController < ApplicationController
+class BackOffice::ResumesReplicasController < BackOfficeController
   before_action :set_resume, only: %i[ show edit update destroy ]
 
   def index
-    @resumes = current_user.resumes_replicas.all
+    @resumes_replicas = current_user.resumes_replicas.all
+    @resume = current_user.resume
   end
 
   def show
-  end
-
-  def new
-    @resume = current_user.resumes_replicas.new
   end
 
   def edit

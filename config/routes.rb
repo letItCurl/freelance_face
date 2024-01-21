@@ -19,7 +19,24 @@ Rails.application.routes.draw do
   scope module: :back_office do
     resources :resumes_replicas
     resource :resume
+
+    resources :resumes, only: [] do
+      member do
+        resources :experiences, only: [:create]
+      end
+    end
+
+    resources :experiences, only: [:destroy]
+
+
+    resources :experiences, only: [] do
+      member do
+        resources :skills, only: [:create]
+      end
+      resources :skills, only: [:destroy]
+    end
   end
+
 
   devise_scope :user do
     authenticated do
@@ -27,7 +44,7 @@ Rails.application.routes.draw do
     end
 
     unauthenticated do
-      root to: "users/registrations#new", as: :unauthenticated_root
+      root to: "users/sessions#new", as: :unauthenticated_root
     end
   end
 end
