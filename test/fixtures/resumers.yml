@@ -1,0 +1,32 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  about: MyText
+  experiences: 
+  skills: 
+  calendy_code: MyText
+  loom_video_code: MyText
+  type: 
+
+two:
+  about: MyText
+  experiences: 
+  skills: 
+  calendy_code: MyText
+  loom_video_code: MyText
+  type:
+
+# == Schema Information
+#
+# Table name: resumers
+#
+#  id              :bigint           not null, primary key
+#  about           :text
+#  calendy_code    :text
+#  experiences     :jsonb
+#  loom_video_code :text
+#  skills          :jsonb
+#  type            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
