@@ -1,5 +1,16 @@
 class Resumes::Experience < ApplicationRecord
+  Resumes::Experience::MAX_EXPERIENCES = 4
   belongs_to :resume
+
+  validate :resume_count
+
+  private
+
+  def resume_count
+    if (self.id.nil? && (self.resume.experiences.count >= Resumes::Experience::MAX_EXPERIENCES))
+      self.errors.add(:base, "Only #{Resumes::Experience::MAX_EXPERIENCES} are allowed.")
+    end
+  end
 end
 
 # == Schema Information

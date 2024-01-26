@@ -4,7 +4,18 @@ class BackOffice::ExperiencesController < BackOfficeController
   def create
     @experience = @resume.experiences.create(title: "New experience...")
 
-    redirect_to (@resume.type == Resume.to_s) ? edit_resume_path : edit_resumes_replica_path(@resume)
+    respond_to do |format|
+      format.turbo_stream do
+        if @experience.valid?
+          render turbo_stream: turbo_stream.update(@resume, partial: "back_office/resumes/form", locals: { resume: @resume })
+        else
+          render turbo_stream: turbo_stream.update(:model_errors, partial: "layouts/shared/model_errors", locals: { model: @experience })
+        end
+      end
+      format.html do
+        redirect_to edit_resume_path
+      end
+    end
   end
 
   def destroy

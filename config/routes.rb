@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope module: :back_office do
     resources :resumes_replicas
-    resource :resume
+    resource :resume, only: [ :update, :edit ]
 
     resources :resumes, only: [] do
       member do

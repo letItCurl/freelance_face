@@ -6,14 +6,13 @@ end
 #
 # Table name: resumes
 #
-#  id              :uuid             not null, primary key
-#  about           :text
-#  calendy_code    :text
-#  loom_video_code :text
-#  type            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  user_id         :uuid
+#  id         :uuid             not null, primary key
+#  about      :text
+#  settings   :jsonb
+#  type       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :uuid
 #
 # Indexes
 #

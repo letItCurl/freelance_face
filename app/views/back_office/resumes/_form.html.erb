@@ -1,69 +1,64 @@
-<%= form_with(model: resume, url: resume_path, class: "contents") do |form| %>
-  <% if resume.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(resume.errors.count, "error") %> prohibited this resume from being saved:</h2>
+<%= turbo_frame_tag resume do %>
+  <%= form_with(model: resume, url: resume_path) do |form| %>
+    <%= render "layouts/shared/model_errors", model: resume %>
 
-      <ul>
-        <% resume.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div class="space-y-6 py-6">
+      <div class="flex flex-col">
+        <%= form.label :about, class: "w-full mb-1 font-bold" %>
+        <%= form.text_area :about, class: "w-full border border-gray-400 rounded", rows: "12" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :meeting_link_settings, class: "mb-1 font-bold" %>
+        <%= form.text_field :meeting_link_settings, class: "border border-gray-400 rounded" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :video_link_settings, class: "mb-1 font-bold" %>
+        <%= form.text_field :video_link_settings, class: "border border-gray-400 rounded" %>
+      </div>
+
+      <div>
+        <%= form.label :experiences, class: "mb-1 font-bold" %>
+        <%= form.fields_for :experiences do |experience_subform| %>
+          <%= turbo_frame_tag experience_subform.object do %>
+            <div class="flex flex-col space-y-4 p-3 my-3 border border-gray-400 rounded">
+              <div class="flex flex-col">
+                <%= experience_subform.label :title %>
+                <%= experience_subform.text_field :title, class: "border border-gray-400 rounded" %>
+              </div>
+              <div class="flex flex-col">
+                <%= experience_subform.label :description %>
+                <%= experience_subform.text_area :description, class: "border border-gray-400 rounded" %>
+              </div>
+              <div class="flex flex-col">
+                <%= experience_subform.label :started_at %>
+                <%= experience_subform.date_field :started_at, class: "border border-gray-400 rounded" %>
+              </div>
+              <div class="flex flex-col">
+                <%= experience_subform.label :ended_at %>
+                <%= experience_subform.date_field :ended_at, class: "border border-gray-400 rounded" %>
+              </div>
+
+              <div class="flex flex-col">
+                <%= experience_subform.label :skills %>
+                <%= experience_subform.text_field :skills, class: "border border-gray-400 rounded" %>
+              </div>
+
+              <%= link_to 'Delete', experience_path(id: experience_subform.object.id), class: "text-red-500 px-2 py-1 border-red-500 mt-3 ml-auto font-medium border-2 rounded", data: { turbo_stream: true, turbo_method: :delete } %>
+            </div>
+          <% end %>
         <% end %>
-      </ul>
+      </div>
+    </div>
+
+    <div class="flex justify-between">
+      <%= form.submit class: "rounded py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer", data: { turbo_frame: "_top" } %>
+      <% if (resume.experiences == Resumes::Experience::MAX_EXPERIENCES) %>
+        <%= link_to "Add experience", experiences_path(id: form.object.id), data: { turbo_method: :post }, class: "text-indigo-700 py-3 px-5 font-medium border-2 rounded border-indigo-700" %>
+      <% else %>
+        <div class="text-gray-700 py-3 px-5 font-medium border-2 rounded border-gray-700">Only <%= Resumes::Experience::MAX_EXPERIENCES %> experiences are allowed</div>
+      <% end %>
     </div>
   <% end %>
-
-  <div class="space-y-6 py-6">
-    <div class="flex flex-col mb-3">
-      <%= form.label :about %>
-      <%= form.text_area :about %>
-    </div>
-
-    <%= turbo_frame_tag "resume_experiences" do %>
-      <%= form.fields_for :experiences do |experience_subform| %>
-        <%= turbo_frame_tag experience_subform.object do %>
-          <div class="flex flex-col space-y-4 p-3 my-3 border border-black">
-            <div class="flex flex-col">
-              <%= experience_subform.label :title %>
-              <%= experience_subform.text_field :title %>
-            </div>
-            <div class="flex flex-col">
-              <%= experience_subform.label :description %>
-              <%= experience_subform.text_area :description %>
-            </div>
-            <div class="flex flex-col">
-              <%= experience_subform.label :started_at %>
-              <%= experience_subform.date_field :started_at %>
-            </div>
-            <div class="flex flex-col">
-              <%= experience_subform.label :ended_at %>
-              <%= experience_subform.date_field :ended_at %>
-            </div>
-
-            <div class="flex flex-col">
-              <%= experience_subform.label :skills %>
-              <%= experience_subform.text_field :skills %>
-            </div>
-
-            <%= link_to 'Delete', experience_path(id: experience_subform.object.id), class: "text-red-500 px-2 py-1 border border-red-500 mt-3 ml-auto", data: { turbo_stream: true, turbo_method: :delete } %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <%= link_to "Add experience", experiences_path(id: resume.id), data: { turbo_method: :post }, class: "text-indigo-700 px-2 py-1 border border-indigo-700 mt-3" %>
-    <% end %>
-
-    <div class="flex flex-col">
-      <%= form.label :loom_video_code %>
-      <%= form.text_area :loom_video_code %>
-    </div>
-
-    <div class="flex flex-col">
-      <%= form.label :calendy_code %>
-      <%= form.text_area :calendy_code %>
-    </div>
-  </div>
-
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
 <% end %>
