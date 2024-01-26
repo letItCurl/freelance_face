@@ -30,6 +30,7 @@ class BackOffice::ResumesController < BackOfficeController
     def create_resume
       @is_onboarding_resume = true
       current_user.create_resume(
+        title: "Coach - Ruby On Rails Expert",
         about: "Self-taught developer who fell in love with the Ruby on Rails framework 8 years ago.\n\nSince then, I've been exclusively working with Rails in startup and corporate teams of all sizes,\nwhile also launching SaaS projects to the market.\n\nI'm focusing on helping developers that need:\n        \n- Building momentum in your socials for your tech career and side-projects.\n- Consistency in marketing and content creation for side-projects.\n- Personal coaching about tech marketing and coding.\n- Defining your online tech persona for your platforms.\n\nIf this resonates with you, I would love to know more about your project. \n\nPlease feel free to book a meeting at your convenience. \n\n Find me here: https://linktr.ee/roland_lopez",
         experiences_attributes: [
           {
@@ -67,6 +68,6 @@ class BackOffice::ResumesController < BackOfficeController
     end
 
     def resume_params
-      params.require(:resume).permit(:about, :meeting_link_settings, :video_link_settings, experiences_attributes: [:id, :description, :ended_at, :started_at, :title, :skills])
+      params.require(:resume).permit(:title, :about, :meeting_link_settings, :video_link_settings, experiences_attributes: [:id, :description, :ended_at, :started_at, :title, :skills])
     end
 end

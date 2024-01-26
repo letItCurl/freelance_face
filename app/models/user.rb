@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  has_one :resume, -> { where(type: Resume.to_s)}, class_name: Resume.to_s
+  has_one :resume, -> { where(type: Resume.to_s) }, class_name: Resume.to_s
   has_many :resumes_replicas, class_name: Resumes::Replica.to_s
 
   has_many :resumes
