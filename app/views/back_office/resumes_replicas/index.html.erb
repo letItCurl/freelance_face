@@ -3,9 +3,9 @@
     <% if @resume.present? && (@resumes_replicas.count > 0) %>
       <%= render partial: "resume", collection: @resumes_replicas %>
     <% elsif @resume.present? && (@resumes_replicas.count == 0) %>
-      <p class="text-green-700 bg-green-300 p-3 border-2 border-green-700 text-center rounded shadow">Click "Generate resume replica"</p>
+      <%= render "layouts/shared/notice", notice: 'Click "Generate resume replica"' %>
     <% else %>
-      <p class="text-red-700 bg-red-300 p-3 border-2 border-red-700 text-center rounded shadow">Create your original resume first</p>
+      <%= render "layouts/shared/notice", alert: "Create your original resume first" %>
     <% end %>
   </div>
 
