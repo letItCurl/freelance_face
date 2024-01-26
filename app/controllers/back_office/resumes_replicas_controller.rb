@@ -9,7 +9,12 @@ class BackOffice::ResumesReplicasController < BackOfficeController
   def show
   end
 
+  def new
+    @resumes_replica = current_user.resumes_replicas.new
+  end
+
   def edit
+
   end
 
   def create

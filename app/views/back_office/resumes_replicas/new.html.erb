@@ -1,3 +1,8 @@
-<div class="flex justify-center">
-  <iframe width="420" height="345" src="https://www.youtube.com/embed/oHg5SJYRHA0"></iframe>
+<div class="flex justify-between items-center mb-6">
+  <h1 class="font-bold text-4xl">Generate replica</h1>
+
+  <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
 </div>
+<hr>
+
+<%= render "form", resumes_replica: @resumes_replica %>
