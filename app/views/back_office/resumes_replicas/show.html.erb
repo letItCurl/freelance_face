@@ -16,8 +16,14 @@
         <div class="text-slate-600 "><%= current_user.first_name %> is <span class="text-green-500">available</span> for hire</div>
         <%= link_to "Contact", @resume_replica.meeting_url_settings, target: "_tab", class: "text-center rounded py-1 px-2 border-2 bg-green-500 border-green-500 text-white font-bold" %>
       </div>
-      <div class="flex justify-end">
-        <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black mt-6 ml-auto" %>
+      <hr class="mt-3">
+      <div class="flex justify-between flex-col mt-6 items-start space-y-4">
+        <p class="text-black text-xl font-bold">📈 Views: 0</p>
+        <p class="text-black text-xl font-bold">Actions: </p>
+        <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
+        <%= link_to "Public link", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
+        <%= link_to "Edit", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
+        <%= link_to "Destroy", resumes_replicas_path, class: "rounded py-2 px-4 text-red-500 inline-block font-medium border-2 border-red-500", data: { confirm: "qdfs" } %>
       </div>
     </div>
   </div>
