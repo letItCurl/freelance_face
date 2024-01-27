@@ -17,10 +17,18 @@ class User < ApplicationRecord
   has_many :resumes
   has_many :experiences, through: :resumes
 
-  def gravatar_url
+  def gravatar_url(**options)
     hash = Digest::MD5.hexdigest(email&.downcase || '')
-    options.reverse_merge!(default: :mp, rating: :pg)
+    options.reverse_merge!(default: :mp, rating: :pg, size: 500)
     "https://secure.gravatar.com/avatar/#{hash}.png?#{options.to_param}"
+  end
+
+  def image_url_settings
+    super.nil? ? gravatar_url : super
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 end
 
@@ -32,6 +40,8 @@ end
 #  admin                  :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  first_name             :string
+#  last_name              :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string

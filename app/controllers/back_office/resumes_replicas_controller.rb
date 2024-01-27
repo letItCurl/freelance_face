@@ -2,7 +2,7 @@
 
 module BackOffice
   class ResumesReplicasController < BackOfficeController
-    before_action :set_resume, only: %i[show edit update destroy]
+    before_action :set_resume_replica, only: %i[show]
 
     def index
       @resumes_replicas = current_user.resumes_replicas.all
@@ -14,6 +14,8 @@ module BackOffice
     def new
       @resumes_replica = current_user.resume.dup
       @resumes_replica = @resumes_replica.becomes!(Resumes::Replica)
+      @resumes_replica.recruter_image_url = ''
+
       return unless current_user.resumes_replicas.count.zero?
 
       @resumes_replica.recruter_full_name = 'Roland Lopez'
@@ -50,18 +52,10 @@ module BackOffice
       end
     end
 
-    def destroy
-      @resume.destroy!
-
-      respond_to do |format|
-        format.html { redirect_to resumes_url, notice: 'Resume was successfully destroyed.' }
-      end
-    end
-
     private
 
-    def set_resume
-      @resume = current_user.resumes_replicas.find(params[:id])
+    def set_resume_replica
+      @resume_replica = current_user.resumes_replicas.find(params[:id])
     end
 
     def resume_params
