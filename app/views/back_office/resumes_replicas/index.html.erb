@@ -1,10 +1,8 @@
 <div class="w-full">
   <div id="resumes" class="min-w-full mb-6">
-    <% if @resume.present? && (@resumes_replicas.count > 0) %>
-      <%= render partial: "resume", collection: @resumes_replicas %>
-    <% elsif @resume.present? && (@resumes_replicas.count == 0) %>
+    <% if @resume.present? && (@resumes_replicas.count == 0) %>
       <%= render "layouts/shared/notice", notice: 'Click "Generate resume replica"' %>
-    <% else %>
+    <% elsif @resume.nil? %>
       <%= render "layouts/shared/notice", alert: "Create your original resume first" %>
     <% end %>
   </div>
@@ -18,4 +16,11 @@
       <%= link_to "Edit original resumer", edit_resume_path, class: "rounded py-3 px-5 bg-blue-600 text-white block font-medium" %>
     </div>
   </div>
+
+  <% if @resume.present? && (@resumes_replicas.count > 0) %>
+    <hr class="mt-6">
+    <ul role="list" class="divide-y divide-gray-200">
+      <%= render partial: "resume", collection: @resumes_replicas %>
+    </ul>
+  <% end %>
 </div>

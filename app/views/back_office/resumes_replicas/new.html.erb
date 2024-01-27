@@ -1,3 +1,9 @@
+<% if current_user.resumes_replicas %>
+  <div class="mb-6">
+    <%= render "layouts/shared/notice", notice: "This is a dummy application. Click on generate." %>
+  </div>
+<% end %>
+
 <div class="flex justify-between items-center mb-6">
   <h1 class="font-bold text-4xl">Generate replica</h1>
 

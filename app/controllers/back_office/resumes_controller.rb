@@ -17,9 +17,6 @@ class BackOffice::ResumesController < BackOfficeController
     end
   end
 
-  def add_skill
-  end
-
   private
     def set_resume
       create_resume if current_user.resume.nil?
@@ -62,12 +59,12 @@ class BackOffice::ResumesController < BackOfficeController
             ended_at: Time.current - 24.month
            }
         ],
-        meeting_link_settings: "https://calendly.com/rolandlopez/tech-nomad-screening",
+        meeting_url_settings: "https://calendly.com/rolandlopez/tech-nomad-screening",
         video_link_settings: "https://www.loom.com/share/0879103cd6cc4a26b1ef873ff053797a"
       )
     end
 
     def resume_params
-      params.require(:resume).permit(:title, :about, :meeting_link_settings, :video_link_settings, experiences_attributes: [:id, :description, :ended_at, :started_at, :title, :skills])
+      params.require(:resume).permit(:title, :about, :meeting_url_settings, :video_link_settings, experiences_attributes: [:id, :description, :ended_at, :started_at, :title, :skills])
     end
 end

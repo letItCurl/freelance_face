@@ -7,11 +7,19 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
+  store :settings, accessors: [ :image_url ], suffix: true, coder: JSON
+
   has_one :resume, -> { where(type: Resume.to_s) }, class_name: Resume.to_s
   has_many :resumes_replicas, class_name: Resumes::Replica.to_s
 
   has_many :resumes
   has_many :experiences, through: :resumes
+
+  def gravatar_url
+    hash = Digest::MD5.hexdigest(self.email&.downcase || "")
+    options.reverse_merge!(default: :mp, rating: :pg)
+    "https://secure.gravatar.com/avatar/#{hash}.png?#{options.to_param}"
+  end
 end
 
 # == Schema Information
