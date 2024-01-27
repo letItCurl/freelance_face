@@ -1,6 +1,14 @@
 <%= form_with(model: resumes_replica) do |form| %>
   <%= render "layouts/shared/model_errors", model: resumes_replica %>
   <div class="space-y-6 py-6">
+    <div class="flex items-center">
+      <%= image_tag resumes_replica.avatar_image.persisted? ? url_for(resumes_replica.avatar_image) : resumes_replica.recruter_image_url, class: "w-20 h-20 rounded-full border-2 border-slate-400 mr-6" %>
+      <div class="">
+        <%= form.label :avatar_image, class: "w-full mb-1 font-bold" %>
+        <%= form.file_field :avatar_image, class: "w-full border border-gray-400 rounded" %>
+        <%= form.hidden_field :recruter_image_url, value: resumes_replica.recruter_image_url %>
+      </div>
+    </div>
     <div class="flex flex-col">
       <%= form.label :recruter_full_name, class: "w-full mb-1 font-bold" %>
       <%= form.text_field :recruter_full_name, class: "w-full border border-gray-400 rounded" %>
@@ -8,10 +16,6 @@
     <div class="flex flex-col">
       <%= form.label :recruter_email, class: "w-full mb-1 font-bold" %>
       <%= form.text_field :recruter_email, class: "w-full border border-gray-400 rounded" %>
-    </div>
-    <div class="flex flex-col">
-      <%= form.label :recruter_image_url, class: "w-full mb-1 font-bold" %>
-      <%= form.text_field :recruter_image_url, class: "w-full border border-gray-400 rounded" %>
     </div>
     <div class="flex flex-col">
       <%= form.label :title, class: "w-full mb-1 font-bold" %>

@@ -77,6 +77,14 @@ module BackOffice
                                      :location,
                                      :meeting_url,
                                      :video_url,
+                                     :slug,
+                                     user_attributes: [
+                                      :id,
+                                      :avatar_image,
+                                      :first_name,
+                                      :last_name,
+                                      :username
+                                     ],
                                      experiences_attributes: %i[
                                        id
                                        description

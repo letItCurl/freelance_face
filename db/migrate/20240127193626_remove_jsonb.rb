@@ -1,10 +1,10 @@
 class RemoveJsonb < ActiveRecord::Migration[7.1]
   def change
-    remove_column :users, :settings
+    remove_column :users, :settings, type: :jsonb
 
     change_table :resumes do |t|
-      t.remove :settings
-      t.remove :recruter
+      t.remove :settings, type: :jsonb
+      t.remove :recruter, type: :jsonb
 
       t.string :meeting_url
       t.string :video_url

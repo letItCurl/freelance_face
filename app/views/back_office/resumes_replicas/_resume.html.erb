@@ -1,6 +1,6 @@
 <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6 lg:px-8">
   <div class="flex min-w-0 gap-x-4">
-    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= resume.recruter_image_url %>" alt="">
+    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= resume.avatar_image.persisted? ? url_for(resume.avatar_image) : resume.recruter_image_url %>" alt="">
     <div class="min-w-0 flex-auto">
       <p class="text-sm font-semibold leading-6 text-gray-900">
         <a href="<%= resumes_replica_path(resume) %>">

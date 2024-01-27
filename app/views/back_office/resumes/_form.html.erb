@@ -2,13 +2,37 @@
   <%= form_with(model: resume, url: resume_path) do |form| %>
     <%= render "layouts/shared/model_errors", model: resume %>
     <div class="space-y-6 py-6">
+      <%= form.fields_for :user do |user_subform| %>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2 md:col-span-1">
+            <%= image_tag avatar_image_url_for(current_user), class: "rounded-xl shadow-xl mx-auto" %>
+          </div>
+          <div class="col-span-2 md:col-span-1 space-y-6">
+            <div class="flex flex-col">
+              <%= user_subform.label :avatar_image, class: "w-full mb-1 font-bold" %>
+              <%= user_subform.file_field :avatar_image, class: "w-full border border-gray-400 rounded" %>
+            </div>
+            <div class="flex flex-col">
+              <%= user_subform.label :first_name, class: "w-full mb-1 font-bold" %>
+              <%= user_subform.text_field :first_name, class: "w-full border border-gray-400 rounded" %>
+            </div>
+            <div class="flex flex-col">
+              <%= user_subform.label :last_name, class: "w-full mb-1 font-bold" %>
+              <%= user_subform.text_field :last_name, class: "w-full border border-gray-400 rounded" %>
+            </div>
+            <div class="flex flex-col border border-red-500 p-2 rounded bg-red-100">
+              <%= user_subform.label :username, class: "w-full mb-1 font-bold" %>
+              <%= user_subform.text_field :username, class: "w-full border border-red-500 border-gray-400 rounded" %>
+              <p class="text-sm mt-2 text-red-500">[Danger Zone]: All previous resume will point to a 404 page.</p>
+            </div>
+            <hr class="md:hidden">
+          </div>
+        </div>
+      <% end %>
+      <hr class="hidden md:block">
       <div class="flex flex-col">
         <%= form.label :title, class: "w-full mb-1 font-bold" %>
         <%= form.text_field :title, class: "w-full border border-gray-400 rounded" %>
-      </div>
-      <div class="flex flex-col">
-        <%= form.label :about, class: "w-full mb-1 font-bold" %>
-        <%= form.text_area :about, class: "w-full border border-gray-400 rounded", rows: "12" %>
       </div>
       <div class="flex flex-col">
         <%= form.label :location, class: "w-full mb-1 font-bold" %>
@@ -21,10 +45,16 @@
       <div class="flex flex-col">
         <%= form.label :meeting_url, class: "mb-1 font-bold" %>
         <%= form.text_field :meeting_url, class: "border border-gray-400 rounded" %>
+        <p class="text-sm mt-2 text-slate-400">Will show a contact link with this URL.</p>
       </div>
       <div class="flex flex-col">
         <%= form.label :video_url, class: "mb-1 font-bold" %>
         <%= form.text_field :video_url, class: "border border-gray-400 rounded" %>
+        <p class="text-sm mt-2 text-slate-400">The image will become clickable and will open this URL.</p>
+      </div>
+      <div class="flex flex-col">
+        <%= form.label :about, class: "w-full mb-1 font-bold" %>
+        <%= form.text_area :about, class: "w-full border border-gray-400 rounded", rows: "12" %>
       </div>
       <div>
         <%= form.label :experiences, class: "mb-1 font-bold" %>
@@ -50,6 +80,7 @@
               <div class="flex flex-col">
                 <%= experience_subform.label :skills %>
                 <%= experience_subform.text_field :skills, class: "border border-gray-400 rounded" %>
+                <p class="text-sm mt-2 text-slate-400">Separate them with a comma, e.g: Ruby On Rails, Hotwire</p>
               </div>
               <%= link_to 'Delete', experience_path(id: experience_subform.object.id), class: "text-red-500 px-2 py-1 border-red-500 mt-3 ml-auto font-medium border-2 rounded", data: { turbo_method: :delete } %>
             </div>
