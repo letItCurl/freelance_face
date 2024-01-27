@@ -11,9 +11,9 @@
     <h1 class="font-bold text-4xl">Resumes</h1>
     <div class="flex justify-end space-x-3">
       <% if @resume.present? %>
-        <%= link_to "Generate resume replica", new_resumes_replica_path, class: "rounded py-3 px-5 border-2 border-blue-600 text-blue-600 block font-medium" %>
+        <%= link_to "Generate resume replica", new_resumes_replica_path, class: "rounded py-2 px-4 border-2 border-blue-600 text-blue-600 block font-medium" %>
       <% end %>
-      <%= link_to "Edit original resumer", edit_resume_path, class: "rounded py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      <%= link_to "Edit original resumer", edit_resume_path, class: "rounded py-2 px-4 bg-blue-600 border-2 border-blue-600 text-white block font-medium" %>
     </div>
   </div>
 

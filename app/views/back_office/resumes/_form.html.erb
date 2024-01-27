@@ -58,11 +58,11 @@
     </div>
 
     <div class="flex justify-between">
-      <%= form.submit class: "rounded py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer", data: { turbo_frame: "_top" } %>
+      <%= form.submit class: "rounded py-2 px-4 bg-blue-600 text-white inline-block font-medium cursor-pointer", data: { turbo_frame: "_top" } %>
       <% if (resume.experiences == Resumes::Experience::MAX_EXPERIENCES) %>
-        <%= link_to "Add experience", experiences_path(id: form.object.id), data: { turbo_method: :post }, class: "text-indigo-700 py-3 px-5 font-medium border-2 rounded border-indigo-700" %>
+        <%= link_to "Add experience", experiences_path(id: form.object.id), data: { turbo_method: :post }, class: "text-indigo-700 py-2 px-4 font-medium border-2 rounded border-indigo-700" %>
       <% else %>
-        <div class="text-gray-700 py-3 px-5 font-medium border-2 rounded border-gray-700">Only <%= Resumes::Experience::MAX_EXPERIENCES %> experiences are allowed</div>
+        <div class="text-gray-700 py-2 px-4 font-medium border-2 rounded border-gray-700">Only <%= Resumes::Experience::MAX_EXPERIENCES %> experiences are allowed</div>
       <% end %>
     </div>
   <% end %>

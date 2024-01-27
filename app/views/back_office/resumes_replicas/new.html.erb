@@ -1,4 +1,4 @@
-<% if current_user.resumes_replicas %>
+<% if current_user.resumes_replicas.count == 0 %>
   <div class="mb-6">
     <%= render "layouts/shared/notice", notice: "This is a dummy application. Click on generate." %>
   </div>
