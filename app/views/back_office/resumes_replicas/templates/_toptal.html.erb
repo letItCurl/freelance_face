@@ -24,11 +24,15 @@
         <hr class="mt-3">
         <div class="flex justify-between flex-col mt-6 items-start space-y-4 bg-gray-200 border shadow-md border-gray-400 rounded-lg p-3">
           <p class="text-black text-xl font-bold">📈 Views: <%= resume.views.count %></p>
-          <p class="text-black text-xl font-bold">Actions: </p>
-          <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
-          <%= link_to "Public link", public_resume_path(username: user.username, resume_id: resume.id), target: "_blank", class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
-          <%= link_to "Edit", edit_resumes_replica_path(resume), class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
-          <%= link_to "Destroy", resumes_replica_path(resume), class: "rounded py-2 px-4 text-red-500 inline-block font-medium border-2 border-red-500", data: { turbo_method: :delete, turbo_confirm: "Are you sure? The link shared will point to a 404." } %>
+          <details>
+            <summary class="text-black text-xl font-bold">Actions</summary>
+            <div class="mt-2">
+              <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded mb-1 py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
+              <%= link_to "Public link", public_resume_path(username: user.username, resume_id: resume.id), target: "_blank", class: "mb-1 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
+              <%= link_to "Edit", edit_resumes_replica_path(resume), class: "mb-1 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
+              <%= link_to "Destroy", resumes_replica_path(resume), class: "mb-1 rounded py-2 px-4 text-red-500 inline-block font-medium border-2 border-red-500", data: { turbo_method: :delete, turbo_confirm: "Are you sure? The link shared will point to a 404." } %>
+            </div>
+          </details>
         </div>
       <% end %>
     </div>
@@ -45,7 +49,9 @@
           <div class="text-slate-500 mt-2"><%= resume.company_name %></div>
         </div>
         <% if resume.avatar_image.persisted? || resume.recruter_image_url.end_with?("elon_musk.jpeg") %>
-          <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= resume.avatar_image.persisted? ? url_for(resume.avatar_image) : resume.recruter_image_url %>" alt="">
+          <div class="my-auto">
+            <img class="border-slate-400 border-2 h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= resume.avatar_image.persisted? ? url_for(resume.avatar_image) : resume.recruter_image_url %>" alt="">
+          </div>
         <% end %>
       </div>
     </div>
