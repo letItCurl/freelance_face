@@ -22,8 +22,8 @@ ONBOARDING_RESUME = {
   location: 'Thailand, Bangkok',
   experiences_attributes: [
     {
-      title: 'APPLICATION SOFTWARE ENGINEER - Mars Mission Team',
-      description: "In-depth technical content creator on the 'Rad Roland' YouTube channel, merging the world of coding with a passion for motorsports. Striving to inspire by demonstrating the possibility of a successful tech career alongside intense personal pursuits.",
+      title: 'Content Creator - Youtube',
+      description: "'Rad Roland' YouTube channel, merging the world of coding with a passion for motorsports. Striving to inspire by demonstrating the possibility of a successful tech career alongside intense personal pursuits.",
       skills: 'Ruby On Rails, Motorsports, Marketing, Content Creation, Scripting, SEO, Film Making, Growth Hacking',
       started_at: Time.current - 5.years,
       ended_at: Time.current
