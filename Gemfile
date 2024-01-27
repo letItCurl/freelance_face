@@ -55,6 +55,9 @@ gem 'devise', '~> 4.9', '>= 4.9.3'
 # Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 7.2'
 
+# CrawlerDetect is a library to detect bots/crawlers via the user agent
+gem 'crawler_detect', '~> 1.2', '>= 1.2.3'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]

@@ -31,6 +31,11 @@ Rails.application.routes.draw do
     resources :experiences, only: [:destroy]
   end
 
+
+  scope module: :front_office do
+    get "/:username/:resume_id", to: "resumes#show", as: :public_resume
+  end
+
   devise_scope :user do
     authenticated do
       root to: 'back_office/resumes_replicas#index', as: :authenticated_root

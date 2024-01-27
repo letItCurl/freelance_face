@@ -9,10 +9,11 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  store :settings, accessors: [:image_url], suffix: true, coder: JSON
+  store :settings, accessors: [:image_url], suffix: true
 
   has_one :resume, -> { where(type: Resume.to_s) }, class_name: Resume.to_s
   has_many :resumes_replicas, class_name: Resumes::Replica.to_s
+  has_many :devices, class_name: Users::Device.to_s
 
   has_many :resumes
   has_many :experiences, through: :resumes

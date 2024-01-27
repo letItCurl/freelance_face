@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  resume: one
+  context: 
+
+two:
+  resume: two
+  context:
+
+# == Schema Information
+#
+# Table name: resumes_views
+#
+#  id         :uuid             not null, primary key
+#  remote_ip  :string
+#  user_agent :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  resume_id  :uuid             not null
+#
+# Indexes
+#
+#  index_resumes_views_on_resume_id  (resume_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (resume_id => resumes.id) ON DELETE => cascade
+#

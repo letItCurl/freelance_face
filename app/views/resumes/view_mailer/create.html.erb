@@ -1,0 +1,6 @@
+<h1>Someone watched your resume 🚀</h1>
+<img src="/received.gif" width="300px" alt="">
+<p>Resume title: <%= @resume.title %></p>
+<p>Recruter: <%= @resume.recruter_full_name %></p>
+<p>Time: <%= @view.created_at %></p>
+<a href="<%= resumes_replica_url(@resume)%>" target="_blank"> Check your analytics here</a>

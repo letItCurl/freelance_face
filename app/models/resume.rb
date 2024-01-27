@@ -4,9 +4,10 @@ class Resume < ApplicationRecord
   belongs_to :user
 
   has_many :experiences, class_name: Resumes::Experience.to_s, dependent: :destroy
+  has_many :views, class_name: Resumes::View.to_s, dependent: :destroy
 
-  store :settings, accessors: %i[meeting_url video_link location developer_since], suffix: true, coder: JSON
-  store :recruter, accessors: %i[linkedin_url full_name image_url email], prefix: true, coder: JSON
+  store :settings, accessors: %i[meeting_url video_link location developer_since], suffix: true
+  store :recruter, accessors: %i[linkedin_url full_name image_url email], prefix: true
 
   accepts_nested_attributes_for :experiences, reject_if: :all_blank
 

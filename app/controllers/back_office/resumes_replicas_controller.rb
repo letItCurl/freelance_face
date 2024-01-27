@@ -2,7 +2,7 @@
 
 module BackOffice
   class ResumesReplicasController < BackOfficeController
-    before_action :set_resume_replica, only: %i[show]
+    before_action :set_resume_replica, only: %i[show destroy]
 
     def index
       @resumes_replicas = current_user.resumes_replicas.all
@@ -49,6 +49,14 @@ module BackOffice
         else
           format.html { render :edit, status: :unprocessable_entity }
         end
+      end
+    end
+
+    def destroy
+      if @resume_replica.destroy
+        redirect_to resumes_replicas_path, notice: "Resume deleted"
+      else
+        render :show
       end
     end
 

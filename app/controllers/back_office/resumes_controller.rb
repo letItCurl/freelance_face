@@ -33,7 +33,7 @@ module BackOffice
       current_user.create_resume(
         title: 'Coach - Ruby On Rails Expert',
         about: "Self-taught developer who fell in love with the Ruby on Rails framework 8 years ago.\n\nSince then, I've been exclusively working with Rails in startup and corporate teams of all sizes,\nwhile also launching SaaS projects to the market.\n\nI'm focusing on helping developers that need:\n        \n- Building momentum in your socials for your tech career and side-projects.\n- Consistency in marketing and content creation for side-projects.\n- Personal coaching about tech marketing and coding.\n- Defining your online tech persona for your platforms.\n\nIf this resonates with you, I would love to know more about your project. \n\nPlease feel free to book a meeting at your convenience. \n\n Find me here: https://linktr.ee/roland_lopez",
-        developer_since_settings: Date.new(2018, 2, 3),
+        developer_since_settings: Date.new(2018, 2, 3).to_s,
         location_settings: 'Thailand, Bangkok',
         experiences_attributes: [
           {
