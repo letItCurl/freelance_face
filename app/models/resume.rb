@@ -1,29 +1,32 @@
+# frozen_string_literal: true
+
 class Resume < ApplicationRecord
   belongs_to :user
 
   has_many :experiences, class_name: Resumes::Experience.to_s, dependent: :destroy
 
-  store :settings, accessors: [ :meeting_url, :video_link ], suffix: true, coder: JSON
-  store :recruter, accessors: [ :linkedin_url, :full_name, :image_url, :email ], prefix: true, coder: JSON
+  store :settings, accessors: %i[meeting_url video_link location developer_since], suffix: true, coder: JSON
+  store :recruter, accessors: %i[linkedin_url full_name image_url email], prefix: true, coder: JSON
 
   accepts_nested_attributes_for :experiences, reject_if: :all_blank
 
-  validates :title, presence: :true
-  validates :about, presence: :true
-  validates :job_description, presence: :true, if: -> () { self.type == Resumes::Replica.to_s }
+  validates :title, presence: true
+  validates :about, presence: true
+  validates :job_description, presence: true, if: -> { type == Resumes::Replica.to_s }
 
   validate :minimum_experiences_count
 
   def recruter_image_url
-    super.nil? ? "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" : super
+    super.nil? ? 'https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2' : super
   end
 
   private
-    def minimum_experiences_count
-      if self.experiences.count == 0 && self.persisted?
-        self.errors.add(:base, "Should have at least one experience")
-      end
-    end
+
+  def minimum_experiences_count
+    return unless experiences.count.zero? && persisted?
+
+    errors.add(:base, 'Should have at least one experience')
+  end
 end
 
 # == Schema Information

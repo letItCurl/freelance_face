@@ -1,9 +1,13 @@
-require "test_helper"
+# frozen_string_literal: true
 
-class Resumes::SkillTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+require 'test_helper'
+
+module Resumes
+  class SkillTest < ActiveSupport::TestCase
+    # test "the truth" do
+    #   assert true
+    # end
+  end
 end
 
 # == Schema Information

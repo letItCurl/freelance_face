@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Resumes
   def self.table_name_prefix
-    "resumes_"
+    'resumes_'
   end
 end

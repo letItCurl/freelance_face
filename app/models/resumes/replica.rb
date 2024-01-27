@@ -1,5 +1,9 @@
-class Resumes::Replica < Resume
-  belongs_to :user
+# frozen_string_literal: true
+
+module Resumes
+  class Replica < Resume
+    belongs_to :user
+  end
 end
 
 # == Schema Information

@@ -14,6 +14,16 @@
       </div>
 
       <div class="flex flex-col">
+        <%= form.label :location_settings, class: "w-full mb-1 font-bold" %>
+        <%= form.text_field :location_settings, class: "w-full border border-gray-400 rounded" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :developer_since_settings, class: "w-full mb-1 font-bold" %>
+        <%= form.date_field :developer_since_settings, class: "w-full border border-gray-400 rounded" %>
+      </div>
+
+      <div class="flex flex-col">
         <%= form.label :meeting_url_settings, class: "mb-1 font-bold" %>
         <%= form.text_field :meeting_url_settings, class: "border border-gray-400 rounded" %>
       </div>

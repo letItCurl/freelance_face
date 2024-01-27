@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -7,7 +9,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  store :settings, accessors: [ :image_url ], suffix: true, coder: JSON
+  store :settings, accessors: [:image_url], suffix: true, coder: JSON
 
   has_one :resume, -> { where(type: Resume.to_s) }, class_name: Resume.to_s
   has_many :resumes_replicas, class_name: Resumes::Replica.to_s
@@ -16,7 +18,7 @@ class User < ApplicationRecord
   has_many :experiences, through: :resumes
 
   def gravatar_url
-    hash = Digest::MD5.hexdigest(self.email&.downcase || "")
+    hash = Digest::MD5.hexdigest(email&.downcase || '')
     options.reverse_merge!(default: :mp, rating: :pg)
     "https://secure.gravatar.com/avatar/#{hash}.png?#{options.to_param}"
   end

@@ -1,14 +1,18 @@
-class Resumes::Experience < ApplicationRecord
-  Resumes::Experience::MAX_EXPERIENCES = 4
-  belongs_to :resume
+# frozen_string_literal: true
 
-  validate :resume_count
+module Resumes
+  class Experience < ApplicationRecord
+    Resumes::Experience::MAX_EXPERIENCES = 4
+    belongs_to :resume
 
-  private
+    validate :resume_count
 
-  def resume_count
-    if (self.id.nil? && (self.resume.experiences.count >= Resumes::Experience::MAX_EXPERIENCES))
-      self.errors.add(:base, "Only #{Resumes::Experience::MAX_EXPERIENCES} are allowed.")
+    private
+
+    def resume_count
+      return unless id.nil? && (resume.experiences.count >= Resumes::Experience::MAX_EXPERIENCES)
+
+      errors.add(:base, "Only #{Resumes::Experience::MAX_EXPERIENCES} are allowed.")
     end
   end
 end

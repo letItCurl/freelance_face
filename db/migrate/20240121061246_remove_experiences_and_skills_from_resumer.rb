@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveExperiencesAndSkillsFromResumer < ActiveRecord::Migration[7.1]
   def change
     remove_column :resumes, :experiences
