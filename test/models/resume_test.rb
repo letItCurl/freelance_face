@@ -14,6 +14,7 @@ end
 #
 #  id                    :uuid             not null, primary key
 #  about                 :text
+#  company_name          :string
 #  developer_since       :datetime
 #  job_description       :text
 #  location              :string

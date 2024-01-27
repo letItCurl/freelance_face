@@ -3,4 +3,4 @@
   <%= link_to "Back to resumes", resumes_replicas_path, class: "mt-3 md:mt-0 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
 </div>
 <hr>
-#TODO: RENDER FORM, SHould merge?
+<%= render partial: 'form', locals: { resumes_replica: @resume_replica } %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_27_213140) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_215814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_213140) do
     t.string "recruter_full_name"
     t.string "recruter_image_url"
     t.string "recruter_email"
+    t.string "company_name"
     t.index ["user_id"], name: "index_resumes_on_user_id"
   end
 
