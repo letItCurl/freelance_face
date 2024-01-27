@@ -33,7 +33,7 @@ EOH
 
 ONBOARDING_RESUME_REPLICA = {
   company_name: 'Space X',
-  recruter_full_name: 'Elon Must',
+  recruter_full_name: 'Elon Musk',
   recruter_email: 'elon@spacex.com',
   job_description: job_description
 }.freeze
