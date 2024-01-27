@@ -6,7 +6,6 @@ class Resume < ApplicationRecord
   has_many :experiences, class_name: Resumes::Experience.to_s, dependent: :destroy
   has_many :views, class_name: Resumes::View.to_s, dependent: :destroy
 
-  store :settings, accessors: %i[meeting_url video_link location developer_since], suffix: true
   store :recruter, accessors: %i[linkedin_url full_name image_url email], prefix: true
 
   accepts_nested_attributes_for :experiences, reject_if: :all_blank
@@ -14,6 +13,7 @@ class Resume < ApplicationRecord
   validates :title, presence: true
   validates :about, presence: true
   validates :job_description, presence: true, if: -> { type == Resumes::Replica.to_s }
+  validates :slug, format: { with: /\A[0-9a-zA-Z\-\_]+\z/, message: "Only allows letters, numbers and _ -" }
 
   validate :minimum_experiences_count
 
@@ -34,17 +34,23 @@ end
 #
 # Table name: resumes
 #
-#  id              :uuid             not null, primary key
-#  about           :text
-#  job_description :text
-#  recruter        :jsonb
-#  settings        :jsonb
-#  slug            :string
-#  title           :string
-#  type            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  user_id         :uuid
+#  id                   :uuid             not null, primary key
+#  about                :text
+#  developer_since      :datetime
+#  job_description      :text
+#  location             :string
+#  meeting_url          :string
+#  recuter_email        :string
+#  recuter_full_name    :string
+#  recuter_image_url    :string
+#  recuter_linkedin_url :string
+#  slug                 :string
+#  title                :string
+#  type                 :string
+#  video_url            :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  user_id              :uuid
 #
 # Indexes
 #

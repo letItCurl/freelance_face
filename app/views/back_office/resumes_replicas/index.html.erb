@@ -6,17 +6,15 @@
       <%= render "layouts/shared/notice", alert: "Create your original resume first" %>
     <% end %>
   </div>
-
-  <div class="flex justify-between items-center">
+  <div class="flex flex-col md:flex-row justify-between items-center">
     <h1 class="font-bold text-4xl">Resumes</h1>
-    <div class="flex justify-end space-x-3">
+    <div class="flex flex-col md:flex-row justify-center md:justify-end text-center">
       <% if @resume.present? %>
-        <%= link_to "Generate resume replica", new_resumes_replica_path, class: "rounded py-2 px-4 border-2 border-blue-600 text-blue-600 block font-medium" %>
+        <%= link_to "Generate resume replica", new_resumes_replica_path, class: "rounded py-2 px-4 border-2 border-blue-600 text-blue-600 block font-medium md:mr-3 mt-3 md:mt-0" %>
       <% end %>
-      <%= link_to "Edit original resumer", edit_resume_path, class: "rounded py-2 px-4 bg-blue-600 border-2 border-blue-600 text-white block font-medium" %>
+      <%= link_to "Edit original resumer", edit_resume_path, class: "mt-3 md:mt-0 rounded py-2 px-4 bg-blue-600 border-2 border-blue-600 text-white block font-medium" %>
     </div>
   </div>
-
   <% if @resume.present? && (@resumes_replicas.count > 0) %>
     <hr class="mt-6">
     <ul role="list" class="divide-y divide-gray-200">

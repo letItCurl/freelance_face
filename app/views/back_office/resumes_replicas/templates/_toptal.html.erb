@@ -1,8 +1,8 @@
 <div class="relative grid grid-cols-6 gap-4 -mt-10 text-sm">
-  <div class="col-span-2 flex flex-col items-stretch justify-start">
+  <div class="col-span-6 md:col-span-2 flex flex-col items-stretch justify-start">
     <div class="sticky top-0">
       <div class="relative rounded-bl-3xl overflow-clip shadow-xl">
-        <img src="<%= user.image_url_settings %>" class="z-10" alt="">
+        <img src="<%= avatar_image_url_for(user) %>" class="z-10 w-full" alt="">
         <div class="bg-slate-400 animate-pulse inset-0 absolute -z-10"></div>
         <div class="absolute inset-0 fill-white opacity-90 bg-blend-multiply grid grid-cols-3 gap-4">
           <div class="col-start-2 col-span-1 my-auto animate-pulse relative flex flex-col items-center">
@@ -10,26 +10,26 @@
             <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/></svg>
           </div>
         </div>
-        <a href="<%= resume.video_link_settings %>" target="_blank" class="inset-0 absolute"></a>
+        <a href="<%= resume.video_url %>" target="_blank" class="inset-0 absolute"></a>
       </div>
       <div class="flex justify-between items-center mt-5 rounded border-l-4 border-green-500 py-3 pl-3">
         <div class="text-slate-600 "><%= user.first_name %> is <span class="text-green-500">available</span> for hire</div>
-        <%= link_to "Contact", resume.meeting_url_settings, target: "_blank", class: "text-center rounded py-1 px-2 border-2 bg-green-500 border-green-500 text-white font-bold" %>
+        <%= link_to "Contact", resume.meeting_url, target: "_blank", class: "text-center rounded py-1 px-2 border-2 bg-green-500 border-green-500 text-white font-bold" %>
       </div>
       <% if current_page?(resumes_replica_path(resume)) %>
         <hr class="mt-3">
-        <div class="flex justify-between flex-col mt-6 items-start space-y-4">
+        <div class="flex justify-between flex-col mt-6 items-start space-y-4 bg-gray-200 border shadow-md border-gray-400 rounded-lg p-3">
           <p class="text-black text-xl font-bold">📈 Views: <%= resume.views.count %></p>
           <p class="text-black text-xl font-bold">Actions: </p>
-          <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
-          <%= link_to "Public link", public_resume_path(username: user.username, resume_id: resume.id), target: "_blank", class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
-          <%= link_to "Edit", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black" %>
+          <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
+          <%= link_to "Public link", public_resume_path(username: user.username, resume_id: resume.id), target: "_blank", class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
+          <%= link_to "Edit", edit_resumes_replica_path(resume), class: "rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
           <%= link_to "Destroy", resumes_replica_path(resume), class: "rounded py-2 px-4 text-red-500 inline-block font-medium border-2 border-red-500", data: { turbo_method: :delete, turbo_confirm: "Are you sure? The link shared will point to a 404." } %>
         </div>
       <% end %>
     </div>
   </div>
-  <div class="col-span-4 pl-12">
+  <div class="col-span-6 md:col-span-4 md:pl-12">
     <div>
       <div class="text-2xl font-bold"><%= user.full_name %></div>
       <div class="text-slate-500 mt-2"><%= resume.title %></div>
@@ -37,11 +37,11 @@
     <div class="grid grid-cols-2 gap-4 border-t border-b mt-6 ">
       <div class="col-span-1 border-r py-4">
         <div class="text-slate-500 text-sm">LOCATION</div>
-        <div class="text-slate-500 font-bold"><%= resume.location_settings %></div>
+        <div class="text-slate-500 font-bold"><%= resume.location %></div>
       </div>
       <div class="col-span-1 py-4 pl-6">
         <div class="text-slate-500 text-sm">DEVELOPER SINCE</div>
-        <div class="text-slate-500 font-bold"><%= resume.developer_since_settings %></div>
+        <div class="text-slate-500 font-bold"><%= resume.developer_since %></div>
       </div>
     </div>
     <div class="my-6 text-slate-500">

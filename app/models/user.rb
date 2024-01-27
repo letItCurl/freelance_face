@@ -8,8 +8,9 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
+  validates :username, format: { with: /\A[0-9a-zA-Z\-\_]+\z/, message: "Only allows letters, numbers and _ -" }
 
-  store :settings, accessors: [:image_url], suffix: true
+  has_one_attached :avatar_image
 
   has_one :resume, -> { where(type: Resume.to_s) }, class_name: Resume.to_s
   has_many :resumes_replicas, class_name: Resumes::Replica.to_s
@@ -17,16 +18,6 @@ class User < ApplicationRecord
 
   has_many :resumes
   has_many :experiences, through: :resumes
-
-  def gravatar_url(**options)
-    hash = Digest::MD5.hexdigest(email&.downcase || '')
-    options.reverse_merge!(default: :mp, rating: :pg, size: 500)
-    "https://secure.gravatar.com/avatar/#{hash}.png?#{options.to_param}"
-  end
-
-  def image_url_settings
-    super.nil? ? gravatar_url : super
-  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -46,7 +37,6 @@ end
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  settings               :jsonb
 #  username               :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_27_090057) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_195736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "resumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "about"
@@ -21,11 +49,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_090057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
-    t.jsonb "settings"
     t.text "job_description"
-    t.jsonb "recruter"
     t.string "slug"
     t.string "title"
+    t.string "meeting_url"
+    t.string "video_url"
+    t.string "location"
+    t.datetime "developer_since"
+    t.string "recuter_linkedin_url"
+    t.string "recuter_full_name"
+    t.string "recuter_image_url"
+    t.string "recuter_email"
     t.index ["user_id"], name: "index_resumes_on_user_id"
   end
 
@@ -60,7 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_090057) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "settings"
     t.string "first_name"
     t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -77,6 +110,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_090057) do
     t.index ["user_id"], name: "index_users_devices_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "resumes", "users", on_delete: :cascade
   add_foreign_key "resumes_experiences", "resumes", on_delete: :cascade
   add_foreign_key "resumes_views", "resumes", on_delete: :cascade

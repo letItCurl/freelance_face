@@ -37,7 +37,7 @@ module BackOffice
         if @resumes_replica.valid?
           format.html { redirect_to resumes_replicas_path, notice: 'Resume was successfully created.' }
         else
-          format.html { render :new, status: :unprocessable_entity }
+          format.turbo_stream { render turbo_stream: turbo_stream.update(:model_errors, partial: 'layouts/shared/model_errors', locals: { model: @resumes_replica }) }
         end
       end
     end
@@ -47,7 +47,7 @@ module BackOffice
         if @resume.update(resume_params)
           format.html { redirect_to resumes_replicas_path, notice: 'Resume was successfully updated.' }
         else
-          format.html { render :edit, status: :unprocessable_entity }
+          format.turbo_stream { render turbo_stream: turbo_stream.update(:model_errors, partial: 'layouts/shared/model_errors', locals: { model: @resume }) }
         end
       end
     end
