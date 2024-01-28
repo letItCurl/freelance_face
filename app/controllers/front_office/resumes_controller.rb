@@ -20,7 +20,7 @@ class FrontOffice::ResumesController < FrontOfficeController
     puts "❤️❤️❤️❤️❤️"
     puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)&.first
     puts "❤️❤️❤️❤️❤️"
-    if @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)&.first&.nil?
+    if @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent).count == 0
       puts "IN LOOP"
       @resume.views.create(remote_ip: request.remote_ip, user_agent: request.user_agent)
     end
