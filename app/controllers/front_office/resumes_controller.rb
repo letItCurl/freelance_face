@@ -6,7 +6,7 @@ class FrontOffice::ResumesController < FrontOfficeController
     raise AbstractController::ActionNotFound.new("not found") if @resume.nil?
     @user = @resume.user
     puts "❤️❤️❤️❤️❤️"
-    puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)
+    puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent).nil?
     puts "❤️❤️❤️❤️❤️"
     puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)&.first&.nil?
     puts "❤️❤️❤️❤️❤️"
