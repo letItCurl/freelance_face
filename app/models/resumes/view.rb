@@ -5,7 +5,7 @@ class Resumes::View < ApplicationRecord
 
   private
     def send_view_email
-      Resumes::ViewMailer.deliver_later(self)
+      Resumes::ViewMailer.create(self).deliver_later
     end
 end
 
