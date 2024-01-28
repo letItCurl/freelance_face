@@ -11,6 +11,8 @@ class FrontOffice::ResumesController < FrontOfficeController
     puts "User Device LIST 🃏"
     puts @user.devices.inspect
     puts @user.devices.class
+    puts "COUNT"
+    puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent).count
     puts "User Device 🃏"
     puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent).nil?
     puts "❤️❤️❤️❤️❤️"
