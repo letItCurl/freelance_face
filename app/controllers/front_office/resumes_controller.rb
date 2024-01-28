@@ -5,6 +5,11 @@ class FrontOffice::ResumesController < FrontOfficeController
     @resume = Resume.includes(:user).where(users: {username: params[:username]}, resumes: {id: params[:resume_id]})&.first
     raise AbstractController::ActionNotFound.new("not found") if @resume.nil?
     @user = @resume.user
+    puts "❤️❤️❤️❤️❤️"
+    puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)&.first&.nil?
+    puts "❤️❤️❤️❤️❤️"
+    puts @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)&.first
+    puts "❤️❤️❤️❤️❤️"
     if @user.devices.where(remote_ip: request.remote_ip, user_agent: request.user_agent)&.first&.nil?
       @resume.views.create(remote_ip: request.remote_ip, user_agent: request.user_agent)
     end
