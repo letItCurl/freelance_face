@@ -24,6 +24,7 @@ end
 #  recruter_image_url    :string
 #  recruter_linkedin_url :string
 #  slug                  :string
+#  status                :integer          default(0)
 #  title                 :string
 #  type                  :string
 #  video_url             :string

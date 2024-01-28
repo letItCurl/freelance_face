@@ -1,4 +1,5 @@
-<%= form_with(model: resumes_replica) do |form| %>
+<%= render partial: 'back_office/resumes/form', locals: { resume: resumes_replica } %>
+<% form_with(model: resumes_replica) do |form| %>
   <%= render "layouts/shared/model_errors", model: resumes_replica %>
   <div class="space-y-6 py-6">
     <div class="flex items-center">

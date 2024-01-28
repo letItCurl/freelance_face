@@ -7,6 +7,7 @@ class Resume < ApplicationRecord
   has_many :views, class_name: Resumes::View.to_s, dependent: :destroy
 
   has_one_attached :avatar_image
+  enum status: { not_started: 0, processing: 1, done: 2, failed: 3 }
 
   accepts_nested_attributes_for :experiences, reject_if: :all_blank
   accepts_nested_attributes_for :user, update_only: true
@@ -17,6 +18,7 @@ class Resume < ApplicationRecord
   validates :developer_since, presence: true
   validates :job_description, presence: true, if: -> { type == Resumes::Replica.to_s }
   validates :slug, format: { with: /\A[0-9a-zA-Z\-\_]+\z/, message: "Only allows letters, numbers and _ -" }, if: -> () { self.slug.present? }
+
 
   validate :minimum_experiences_count
 
@@ -49,6 +51,7 @@ end
 #  recruter_image_url    :string
 #  recruter_linkedin_url :string
 #  slug                  :string
+#  status                :integer          default(0)
 #  title                 :string
 #  type                  :string
 #  video_url             :string

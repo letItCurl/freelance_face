@@ -1,33 +1,69 @@
+<%-
+  form_args = if (resume.type == Resume.to_s)
+    {model: resume, url: resume_path}
+  else
+    {model: resume}
+  end
+-%>
 <%= turbo_frame_tag resume do %>
-  <%= form_with(model: resume, url: resume_path) do |form| %>
+  <%= form_with(**form_args) do |form| %>
     <%= render "layouts/shared/model_errors", model: resume %>
     <div class="space-y-6 py-6">
-      <%= form.fields_for :user do |user_subform| %>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="col-span-2 md:col-span-1">
-            <%= image_tag avatar_image_url_for(current_user), class: "rounded-xl shadow-xl mx-auto" %>
+      <% if resume.type == Resume.to_s %>
+        <%= form.fields_for :user do |user_subform| %>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-2 md:col-span-1">
+              <%= image_tag avatar_image_url_for(current_user), class: "rounded-xl shadow-xl mx-auto" %>
+            </div>
+            <div class="col-span-2 md:col-span-1 space-y-6">
+              <div class="flex flex-col">
+                <%= user_subform.label :avatar_image, class: "w-full mb-1 font-bold" %>
+                <%= user_subform.file_field :avatar_image, class: "w-full border border-gray-400 rounded" %>
+              </div>
+              <div class="flex flex-col">
+                <%= user_subform.label :first_name, class: "w-full mb-1 font-bold" %>
+                <%= user_subform.text_field :first_name, class: "w-full border border-gray-400 rounded" %>
+              </div>
+              <div class="flex flex-col">
+                <%= user_subform.label :last_name, class: "w-full mb-1 font-bold" %>
+                <%= user_subform.text_field :last_name, class: "w-full border border-gray-400 rounded" %>
+              </div>
+              <div class="flex flex-col border border-red-500 p-2 rounded bg-red-100">
+                <%= user_subform.label :username, class: "w-full mb-1 font-bold" %>
+                <%= user_subform.text_field :username, class: "w-full border border-red-500 border-gray-400 rounded" %>
+                <p class="text-sm mt-2 text-red-500">[Danger Zone]: All previous resume will point to a 404 page.</p>
+              </div>
+              <hr class="md:hidden">
+            </div>
           </div>
-          <div class="col-span-2 md:col-span-1 space-y-6">
-            <div class="flex flex-col">
-              <%= user_subform.label :avatar_image, class: "w-full mb-1 font-bold" %>
-              <%= user_subform.file_field :avatar_image, class: "w-full border border-gray-400 rounded" %>
-            </div>
-            <div class="flex flex-col">
-              <%= user_subform.label :first_name, class: "w-full mb-1 font-bold" %>
-              <%= user_subform.text_field :first_name, class: "w-full border border-gray-400 rounded" %>
-            </div>
-            <div class="flex flex-col">
-              <%= user_subform.label :last_name, class: "w-full mb-1 font-bold" %>
-              <%= user_subform.text_field :last_name, class: "w-full border border-gray-400 rounded" %>
-            </div>
-            <div class="flex flex-col border border-red-500 p-2 rounded bg-red-100">
-              <%= user_subform.label :username, class: "w-full mb-1 font-bold" %>
-              <%= user_subform.text_field :username, class: "w-full border border-red-500 border-gray-400 rounded" %>
-              <p class="text-sm mt-2 text-red-500">[Danger Zone]: All previous resume will point to a 404 page.</p>
-            </div>
-            <hr class="md:hidden">
+        <% end %>
+      <% else %>
+        <div class="flex items-center">
+          <%= image_tag resume.avatar_image.persisted? ? url_for(resume.avatar_image) : resume.recruter_image_url, class: "w-20 h-20 rounded-full border-2 border-slate-400 mr-6" %>
+          <div class="">
+            <%= form.label :avatar_image, class: "w-full mb-1 font-bold" %>
+            <%= form.file_field :avatar_image, class: "w-full border border-gray-400 rounded" %>
+            <%= form.hidden_field :recruter_image_url, value: resume.recruter_image_url %>
           </div>
         </div>
+        <div class="flex flex-col">
+          <%= form.label :company_name, class: "w-full mb-1 font-bold" %>
+          <%= form.text_field :company_name, class: "w-full border border-gray-400 rounded" %>
+        </div>
+        <div class="flex flex-col">
+          <%= form.label :recruter_full_name, class: "w-full mb-1 font-bold" %>
+          <%= form.text_field :recruter_full_name, class: "w-full border border-gray-400 rounded" %>
+        </div>
+        <div class="flex flex-col">
+          <%= form.label :recruter_email, class: "w-full mb-1 font-bold" %>
+          <%= form.text_field :recruter_email, class: "w-full border border-gray-400 rounded" %>
+        </div>
+        <% unless resume.persisted? %>
+          <div class="flex flex-col">
+            <%= form.label :job_description, class: "mb-1 font-bold" %>
+            <%= form.text_area :job_description, class: "border border-gray-400 rounded", rows: "5" %>
+          </div>
+        <% end %>
       <% end %>
       <hr class="hidden md:block">
       <div class="flex flex-col">
@@ -67,7 +103,7 @@
               </div>
               <div class="flex flex-col">
                 <%= experience_subform.label :description %>
-                <%= experience_subform.text_area :description, class: "border border-gray-400 rounded" %>
+                <%= experience_subform.text_area :description, class: "border border-gray-400 rounded", rows: "4" %>
               </div>
               <div class="flex flex-col">
                 <%= experience_subform.label :started_at %>

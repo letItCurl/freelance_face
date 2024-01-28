@@ -34,6 +34,7 @@ module BackOffice
 
       respond_to do |format|
         if @resumes_replica.valid?
+          ResumesReplicas::GenerateJob.perform_async(@resumes_replica.id)
           format.html { redirect_to resumes_replicas_path, notice: 'Resume was successfully created.' }
         else
           format.turbo_stream { render turbo_stream: turbo_stream.update(:model_errors, partial: 'layouts/shared/model_errors', locals: { model: @resumes_replica }) }
@@ -73,7 +74,19 @@ module BackOffice
         :company_name,
         :recruter_image_url,
         :avatar_image,
-        :job_description
+        :location,
+        :developer_since,
+        :meeting_url,
+        :video_url,
+        :job_description,
+        experiences_attributes: %i[
+                                       id
+                                       description
+                                       ended_at
+                                       started_at
+                                       title
+                                       skills
+                                     ]
       )
     end
   end

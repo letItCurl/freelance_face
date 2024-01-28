@@ -90,7 +90,7 @@
               <div class="text-slate-500 font-bold"><%= experience.started_at.year %> - <%= experience.ended_at.year %></div>
             </div>
             <div>
-              <%= experience.description %>
+              <%= simple_format(experience.description) %>
             </div>
             <div>
               Technologies: <%= experience.skills %>
