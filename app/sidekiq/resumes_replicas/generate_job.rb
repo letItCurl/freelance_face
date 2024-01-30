@@ -76,6 +76,7 @@ class ResumesReplicas::GenerateJob
     }
 
     res = conn.post("v1/chat/completions", data)
+
     puts res.body
     enhanced_resume = JSON.parse(res.body.dig("choices")[0].dig("message", "content"))
     puts "---"
@@ -91,7 +92,15 @@ class ResumesReplicas::GenerateJob
       xp.save
       puts "xxxxxxxxxxxx"
     end
+
     @resumes_replica.update(about: enhanced_resume["about"])
+
     @resumes_replica.done!
+
+    Turbo::StreamsChannel.broadcast_render_to(
+      @resumes_replica,
+      partial: "back_office/resumes_replicas/templates/toptal",
+      locals: { user: @resumes_replica.user, resume: @resumes_replica, show_back_office_actions: true }
+    )
   end
 end

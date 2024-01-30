@@ -1,1 +1,4 @@
-<%= render "back_office/resumes_replicas/templates/toptal", user: current_user, resume: @resume_replica %>
+<%= turbo_stream_from @resume_replica %>
+<div id="<%= dom_id(@resume_replica) %>">
+  <%= render "back_office/resumes_replicas/templates/toptal", user: current_user, resume: @resume_replica, show_back_office_actions: true %>
+</div>

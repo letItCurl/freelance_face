@@ -1,0 +1,29 @@
+<% if status == "not_started" %>
+  <div class="mt-1 flex items-center gap-x-1.5">
+    <div class="flex-none rounded-full bg-gray-500/20 p-1">
+      <div class="h-1.5 w-1.5 rounded-full bg-gray-500"></div>
+    </div>
+    <p class="text-xs leading-5 text-gray-500">Ready</p>
+  </div>
+<% elsif status == "processing" %>
+  <div class="mt-1 flex items-center gap-x-1.5">
+    <div class="flex-none rounded-full bg-orange-500/20 p-1">
+      <div class="h-1.5 w-1.5 rounded-full bg-orange-500"></div>
+    </div>
+    <p class="text-xs leading-5 text-orange-500">Ready</p>
+  </div>
+<% elsif status == "done" %>
+  <div class="mt-1 flex items-center gap-x-1.5">
+    <div class="flex-none rounded-full bg-emerald-500/20 p-1">
+      <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+    </div>
+    <p class="text-xs leading-5 text-gray-500">Ready</p>
+  </div>
+<% else %>
+  <div class="mt-1 flex items-center gap-x-1.5">
+    <div class="flex-none rounded-full bg-red-600/20 p-1">
+      <div class="h-1.5 w-1.5 rounded-full bg-red-600"></div>
+    </div>
+    <p class="text-xs leading-5 text-red-600">Ready</p>
+  </div>
+<% end %>

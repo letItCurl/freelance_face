@@ -34,8 +34,11 @@ module BackOffice
 
       respond_to do |format|
         if @resumes_replica.valid?
-          ResumesReplicas::GenerateJob.perform_async(@resumes_replica.id) if @resumes_replica.not_started?
-          format.html { redirect_to resumes_replicas_path, notice: 'Resume was successfully created.' }
+          if @resumes_replica.not_started?
+            ResumesReplicas::GenerateJob.perform_async(@resumes_replica.id)
+            @resumes_replica.processing!
+          end
+          format.html { redirect_to resumes_replica_path(@resumes_replica), notice: 'Resume was successfully created.' }
         else
           format.turbo_stream { render turbo_stream: turbo_stream.update(:model_errors, partial: 'layouts/shared/model_errors', locals: { model: @resumes_replica }) }
         end
