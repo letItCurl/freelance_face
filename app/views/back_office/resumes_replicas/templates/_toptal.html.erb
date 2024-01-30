@@ -25,11 +25,16 @@
     <%= link_to "Back to resumes", resumes_replicas_path, class: "rounded mb-1 py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
   </div>
   <div class="flex justify-between flex-col mt-6 items-center space-y-4 bg-gray-200 border shadow-md border-gray-400 rounded-lg p-3">
-    <p class="text-black text-xl font-bold">You are currently in preview mode</p>
-    <p class="text-black text-xl font-bold">📈 Total Views on your resume: <%= resume.views.count %></p>
-    <div class="mt-2">
-      <%= link_to "Public link", public_resume_path(username: user.username, resume_id: resume.id), target: "_blank", id: "copy_to_clip_board", class: "mb-1 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
-      <%= link_to "Edit", edit_resumes_replica_path(resume), class: "mb-1 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
+    <p class="text-black text-xl text-center font-bold">You are currently in preview mode</p>
+    <p class="text-black text-xl text-center font-bold">📈 Total Views on your resume: <%= resume.views.count %></p>
+    <div class="mt-2 flex flex-col md:flex-row">
+      <%= link_to public_resume_path(username: user.username, resume_id: resume.id), data:{ controller: "copy-to-clip-board" }, target: "_blank", class: "mb-1 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent flex items-center" do %>
+        <p>Copy public link</p>
+        <div class="w-5 ml-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z"/></svg>
+        </div>
+      <% end %>
+      <%= link_to "Edit", edit_resumes_replica_path(resume), class: "mb-1 mx-0 md:mx-3 rounded py-2 px-4 bg-gray-100 inline-block font-medium border-2 border-black bg-transparent" %>
       <%= link_to "Destroy", resumes_replica_path(resume), class: "mb-1 rounded py-2 px-4 text-red-500 inline-block font-medium border-2 border-red-500", data: { turbo_method: :delete, turbo_confirm: "Are you sure? The link shared will point to a 404." } %>
     </div>
   </div>
