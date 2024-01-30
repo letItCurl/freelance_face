@@ -3,7 +3,7 @@
     <% if @resume.present? && (@resumes_replicas.count == 0) %>
       <%= render "layouts/shared/notice", notice: 'Click "Generate resume replica"' %>
     <% elsif @resume.nil? %>
-      <%= render "layouts/shared/notice", alert: "Create your original resume first" %>
+      <%= render "layouts/shared/notice", notice: "STEP 1: Edit your original resume first" %>
     <% end %>
   </div>
   <div class="flex flex-col md:flex-row justify-between items-center">
