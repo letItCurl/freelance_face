@@ -3,7 +3,7 @@
     <div class="flex flex-col max-w-md mx-auto mt-12">
       <div class="border-2 p-6 rounded-lg bg-white mx-3">
         <div class="flex items-center justify-center">
-          <div class="text-xl font-bold mr-3">Processing</div>
+          <div class="text-xl font-bold mr-3">Processing...</div>
           <div>
             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -12,10 +12,10 @@
           </div>
         </div>
         <hr class="my-3">
-        <div class="text-xl font-bold mr-3 text-center">Your resume is being optimized by AI</div>
+        <div class="text-xl font-bold mr-3 text-center">Your resume is being optimized by AI.</div>
         <hr class="my-3">
-        This will take just a few seconds. You can visit the <%= link_to "original draft", resumes_replicas_path, class: "underline text-indigo-500" %>
-        or <%= link_to "go back to your resumes.", resumes_replicas_path, class: "underline text-indigo-500" %>
+        <p>This will take a few seconds.</p>
+        <p>You stay here OR <%= link_to "go back to your resumes.", resumes_replicas_path, class: "underline text-indigo-500" %>.</p>
       </div>
     </div>
   </div>
