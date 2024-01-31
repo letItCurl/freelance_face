@@ -77,20 +77,20 @@ class ResumesReplicas::GenerateJob
 
     res = conn.post("v1/chat/completions", data)
 
-    puts res.body
+    # puts res.body
     enhanced_resume = JSON.parse(res.body.dig("choices")[0].dig("message", "content"))
-    puts "---"
-    puts enhanced_resume
+    # puts "---"
+    # puts enhanced_resume
 
     @resumes_replica.experiences.each do |xp|
-      puts "xxxxxxxxxxxx"
+      # puts "xxxxxxxxxxxx"
       enhanced_xp = enhanced_resume["experiences"].find{|el| xp.id == el["id"]}
       xp.title = enhanced_xp["title"]
       xp.description = enhanced_xp["description"].map{|el| "- #{el}"}.join("\n\n")
       xp.skills = enhanced_xp["skills"].join(", ")
-      puts xp.attributes
+      # puts xp.attributes
       xp.save
-      puts "xxxxxxxxxxxx"
+      # puts "xxxxxxxxxxxx"
     end
 
     @resumes_replica.update(about: enhanced_resume["about"])

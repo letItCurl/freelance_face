@@ -10,6 +10,18 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <% if controller_name == "home" %>
+      <div class="p-3 sticky top-0 backdrop-blur-md bg-white/30 border-b border-gray-500/30 shadow-md flex items-center justify-between z-10">
+        <div class="flex items-center">
+          <%= image_tag 'logo.png', class: "w-8 md:w-16" %>
+          <h1 class="font-bold text-xl md:text-2xl ml-4">Freelance Face</h1>
+        </div>
+        <div class="flex flex-col md:flex-row justify-end items-end">
+          <%= link_to 'Log in', new_user_session_path, class: "rounded py-2 px-4 text-blue-600 inline-block font-medium cursor-pointer" %>
+          <%= link_to 'Create account', new_user_registration_path, class: "rounded py-2 px-4 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        </div>
+      </div>
+    <% end %>
     <main class="container mx-auto mt-12 px-5 flex flex-col pb-12">
       <div class="mx-auto md:w-2/3 w-full pb-6">
         <% if notice %>

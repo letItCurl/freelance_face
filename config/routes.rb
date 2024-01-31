@@ -3,6 +3,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'home/index'
+
   authenticate :user, ->(u) { u.is_admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -42,7 +44,7 @@ Rails.application.routes.draw do
     end
 
     unauthenticated do
-      root to: 'users/sessions#new', as: :unauthenticated_root
+      root to: 'home#index'
     end
   end
 end
