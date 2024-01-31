@@ -15,7 +15,7 @@
         <div class="text-xl font-bold mr-3 text-center">Your resume is being optimized by AI.</div>
         <hr class="my-3">
         <p>This will take a few seconds.</p>
-        <p>You stay here OR <%= link_to "go back to your resumes.", resumes_replicas_path, class: "underline text-indigo-500" %>.</p>
+        <p>You stay here OR <%= link_to "go back to your resumes.", resumes_replicas_path, class: "underline text-indigo-500" %></p>
       </div>
     </div>
   </div>
@@ -48,6 +48,7 @@
         <% if resume.video_url.present? %>
           <div class="bg-slate-400 animate-pulse inset-0 absolute -z-10"></div>
           <div class="absolute inset-0 fill-white opacity-90 bg-blend-multiply grid grid-cols-3 gap-4">
+            <div class="absolute inset-0 bg-slate-700 opacity-20 bg-blend-multiply"></div>
             <div class="col-start-2 col-span-1 my-auto animate-pulse relative flex flex-col items-center">
               <p class="text-white font-bold">Watch video</p>
               <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/></svg>

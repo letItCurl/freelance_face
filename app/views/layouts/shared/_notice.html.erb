@@ -2,4 +2,6 @@
   <p class="text-green-700 bg-green-300 p-3 border-2 border-green-700 text-center rounded font-bold shadow"><%= notice %></p>
 <% elsif local_assigns[:alert].present? %>
   <p class="text-red-700 bg-red-300 p-3 border-2 border-red-700 text-center rounded font-bold shadow"><%= alert %></p>
+<% elsif local_assigns[:message].present? %>
+  <p class="text-gray-700 bg-gray-300 p-3 border-2 border-gray-700 text-center rounded font-bold shadow"><%= message %></p>
 <% end %>

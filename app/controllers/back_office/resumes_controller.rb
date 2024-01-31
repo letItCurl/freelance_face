@@ -6,8 +6,6 @@ module BackOffice
 
     def edit
       return unless @is_onboarding_resume
-
-      flash.now[:notice] = "We initalized a fresh resume for you. Click 'Back to resume'"
     end
 
     def update
