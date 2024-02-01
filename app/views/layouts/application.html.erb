@@ -28,12 +28,11 @@
           <h1 class="font-bold text-xl md:text-2xl ml-4">Freelance Face</h1>
         </div>
         <div class="flex flex-col md:flex-row justify-end items-end">
-          <%= link_to 'Log in', new_user_session_path, class: "rounded py-2 px-4 text-blue-600 inline-block font-medium cursor-pointer" %>
-          <%= link_to 'Create account', new_user_registration_path, class: "rounded py-2 px-4 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+          <%= link_to 'Create account', new_user_registration_path, class: "ring ring-2 ring-red-500 rounded py-2 px-4 bg-red-600 text-white inline-block font-medium cursor-pointer" %>
         </div>
       </div>
     <% end %>
-    <main class="container mx-auto mt-12 px-5 flex flex-col pb-12">
+    <main class="container mx-auto mt-6 md:mt-12 px-5 flex flex-col pb-32">
       <div class="mx-auto md:w-2/3 w-full pb-6">
         <% if notice %>
           <%= render "layouts/shared/notice", notice: notice %>
@@ -47,5 +46,12 @@
       </div>
     </main>
   </body>
-  <span class="field_with_errors"></span>
+  <% if controller_path.start_with?("front_office") %>
+  <% else %>
+    <div class="fixed bottom-0 left-0 flex">
+      <a href="https://linktr.ee/roland_lopez" class="px-2 pt-2 border rounded bg-white w-32">
+        <%= image_tag 'me.png', class: "" %>
+      </a>
+    </div>
+  <% end %>
 </html>
