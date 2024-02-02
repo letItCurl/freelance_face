@@ -76,31 +76,32 @@ class ResumesReplicas::GenerateJob
     }
 
     res = conn.post("v1/chat/completions", data)
+    begin
+      puts "RESUME: #{@resumes_replica}"
+      puts "BODY: #{res.body}"
+      enhanced_resume = JSON.parse(res.body.dig("choices")[0].dig("message", "content"))
+      puts puts "CONTENT: #{enhanced_resume}"
 
-    # puts res.body
-    enhanced_resume = JSON.parse(res.body.dig("choices")[0].dig("message", "content"))
-    # puts "---"
-    # puts enhanced_resume
+      @resumes_replica.experiences.each do |xp|
+        enhanced_xp = enhanced_resume["experiences"].find{|el| xp.id == el["id"]}
+        xp.title = enhanced_xp["title"]
+        xp.description = enhanced_xp["description"].map{|el| "- #{el}"}.join("\n\n")
+        xp.skills = enhanced_xp["skills"].join(", ")
+        puts "ATTRIBUTES: #{xp.attributes}"
+        xp.save
+      end
 
-    @resumes_replica.experiences.each do |xp|
-      # puts "xxxxxxxxxxxx"
-      enhanced_xp = enhanced_resume["experiences"].find{|el| xp.id == el["id"]}
-      xp.title = enhanced_xp["title"]
-      xp.description = enhanced_xp["description"].map{|el| "- #{el}"}.join("\n\n")
-      xp.skills = enhanced_xp["skills"].join(", ")
-      # puts xp.attributes
-      xp.save
-      # puts "xxxxxxxxxxxx"
+      @resumes_replica.update(about: enhanced_resume["about"])
+
+      @resumes_replica.done!
+    rescue
+      @resumes_replica.failed!
+    ensure
+      Turbo::StreamsChannel.broadcast_render_to(
+        @resumes_replica,
+        partial: "back_office/resumes_replicas/templates/toptal",
+        locals: { user: @resumes_replica.user, resume: @resumes_replica, show_back_office_actions: true }
+      )
     end
-
-    @resumes_replica.update(about: enhanced_resume["about"])
-
-    @resumes_replica.done!
-
-    Turbo::StreamsChannel.broadcast_render_to(
-      @resumes_replica,
-      partial: "back_office/resumes_replicas/templates/toptal",
-      locals: { user: @resumes_replica.user, resume: @resumes_replica, show_back_office_actions: true }
-    )
   end
 end
