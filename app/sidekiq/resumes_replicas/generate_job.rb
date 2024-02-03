@@ -29,11 +29,11 @@ class ResumesReplicas::GenerateJob
       ```
 
       Here are the instructions on how you should rewrite the resume:
-      - Treat the lecturer as a tech recruiter. Don't delve too deeply into the explanation.
+      - Treat the reader as a tech recruiter. Don't dive too deeply into explanation.
       - The about section should anticipate the company's problems and teams need, but not deviate too much from the original text. The new text should be 80 words long maximum. Don't spend too many words describing the journey of how you learned to code or personal information.
       - Never repeat the technologies anywhere other than in the skill JSON key.
       - Reformat the title of each experience to be more in line with market standards.
-      - For each experience, find the 3 most impactful feats from the original resume that are related to the job board. The writing should be a mix of challenge and numbers.
+      - For each experience, find the 3 most impactful feats from the original resume that are related to the job board. The writing style should be a mix of challenges completed and numbers.
 
       Here are the instructions concerning the tone used:
       - Be casual unless otherwise specified
@@ -80,7 +80,7 @@ class ResumesReplicas::GenerateJob
       puts "RESUME: #{@resumes_replica}"
       puts "BODY: #{res.body}"
       enhanced_resume = JSON.parse(res.body.dig("choices")[0].dig("message", "content"))
-      puts puts "CONTENT: #{enhanced_resume}"
+      puts "CONTENT: #{enhanced_resume}"
 
       @resumes_replica.experiences.each do |xp|
         enhanced_xp = enhanced_resume["experiences"].find{|el| xp.id == el["id"]}
