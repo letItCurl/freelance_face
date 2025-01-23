@@ -61,6 +61,9 @@ accessories:
   redis:
     host: 128.199.248.93
     image: redis:8.0-M03-bookworm
-    cmd: "redis-server --requirepass some_password"
+    #env:
+    #  secret:
+    #    - REDIS_PASSWORD
+    cmd: "redis-server --requirepass <%= ENV.fetch("REDIS_PASSWORD") %>"
     volumes:
       - /var/lib/redis:/data
