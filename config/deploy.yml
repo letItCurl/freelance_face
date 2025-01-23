@@ -59,9 +59,8 @@ accessories:
     directories:
       - data:/var/lib/postgresql/data
   redis:
+    host: 128.199.248.93
     image: redis:8.0-M03-bookworm
     cmd: "redis-server --requirepass some_password"
     volumes:
       - /var/lib/redis:/data
-    options:
-      network: "private"
