@@ -1,5 +1,5 @@
 <h1>Someone watched your resume 🚀</h1>
-<img src="<%= "#{Rails.env.production? ? 'https://freelanceface.com/' : 'http://localhost:3000/'}" %>/received.gif" width="300px" alt="">
+<img src="<%= "#{Rails.env.production? ? 'https://freelance-resume.rolandsoftwares.com/' : 'http://localhost:3000/'}" %>/received.gif" width="300px" alt="">
 <p>Resume title: <%= @resume.title %></p>
 <p>Recruter: <%= @resume.recruter_full_name %></p>
 <a href="<%= resumes_replica_url(@resume)%>" target="_blank"> Check your analytics here</a>

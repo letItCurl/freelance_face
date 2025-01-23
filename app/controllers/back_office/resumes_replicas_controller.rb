@@ -20,7 +20,7 @@ module BackOffice
       ONBOARDING_RESUME_REPLICA.keys.each do |key|
         @resumes_replica.public_send("#{key}=", ONBOARDING_RESUME_REPLICA[key])
       end
-      @resumes_replica.recruter_image_url = "#{Rails.env.production? ? 'https://freelanceface.com/' : 'http://localhost:3000/'}elon_musk.jpeg"
+      @resumes_replica.recruter_image_url = "#{Rails.env.production? ? 'https://freelance-resume.rolandsoftwares.com/' : 'http://localhost:3000/'}elon_musk.jpeg"
     end
 
     def edit; end
