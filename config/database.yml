@@ -80,5 +80,7 @@ test:
 production:
   <<: *default
   database: freelance_face_production
-  username: freelance_face
-  password: <%= ENV["FREELANCE_FACE_DATABASE_PASSWORD"] %>
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>

@@ -1,0 +1,67 @@
+service: freelance-resume
+
+image: gnarlylatino/freelance-resume
+
+servers:
+  web:
+    - 128.199.248.93
+  job:
+    hosts:
+      - 128.199.248.93
+    cmd: bundle exec sidekiq
+
+proxy:
+  ssl: true
+  host: freelance-resume.rolandsoftwares.com
+
+registry:
+  username: gnarlylatino
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Configure builder setup.
+builder:
+  arch: amd64
+
+env:
+  clear:
+    SOLID_QUEUE_IN_PUMA: true
+    DB_HOST: freelance-resume-db
+    DB_PORT: 5432
+    RAILS_LOG_LEVEL: debug
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+    - POSTGRES_USER
+    - REDIS_URL
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
+volumes:
+  - "review-collector_storage:/rails/storage"
+
+asset_path: /rails/public/assets
+
+accessories:
+  db:
+    image: postgres:bookworm
+    host: 128.199.248.93
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+        - POSTGRES_USER
+    files:
+      - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/postgresql/data
+  redis:
+    image: redis:8.0-M03-bookworm
+    cmd: "redis-server --requirepass some_password"
+    volumes:
+      - /var/lib/redis:/data
+    options:
+      network: "private"
