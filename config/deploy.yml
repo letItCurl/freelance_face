@@ -64,6 +64,6 @@ accessories:
     env:
       secret:
         - REDIS_PASSWORD
-    cmd: "redis-server --requirepass $REDIS_PASSWORD"
+    cmd: "redis-server --requirepass ${REDIS_PASSWORD}"
     volumes:
       - /var/lib/redis:/data
