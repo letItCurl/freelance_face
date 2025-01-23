@@ -61,9 +61,6 @@ accessories:
   redis:
     host: 128.199.248.93
     image: redis:8.0-M03-bookworm
-    env:
-      secret:
-        - REDIS_PASSWORD
-    cmd: "redis-server --requirepass <%= File.read('.kamal/secrets')[/REDIS_PASSWORD="(.*?)"/, 1] %>"
+    cmd: "redis-server --requirepass not_a_good_practice_but_network_is_private"
     volumes:
       - /var/lib/redis:/data
